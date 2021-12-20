@@ -14,13 +14,29 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        externalNativeBuild {
+//            cmake {
+//                cppFlags "-frtti -fexceptions"
+//                abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
+//                arguments "-DOpenCV_DIR=" + opencvsdk + "/sdk/native"
+//            }
+//        }
     }
+//    externalNativeBuild {
+//        cmake {
+//            path "src/main/jni/CMakeLists.txt"
+//            version "3.10.2"
+//        }
+//    }
 
+    //ndk-build mode
     sourceSets.main {
         jni.srcDirs = [] //disable automatic ndk-build call
     }
+
     task ndkBuild(type: Exec, description: 'Compile JNI source via NDK') {
-        commandLine "C:\\env\\\\android-ndk-r17c\\ndk-build.cmd",
+//        commandLine "C:\\env\\Sdk\\ndk\\21.1.6352462\\ndk-build.cmd",
+                commandLine "C:\\env\\android-ndk-r17c\\ndk-build.cmd",
                 'NDK_PROJECT_PATH=build/intermediates/ndk',
                 'NDK_LIBS_OUT=src/main/jniLibs',
                 'APP_BUILD_SCRIPT=src/main/jni/Android.mk',
@@ -40,6 +56,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+//    ndkVersion "21.1.6352462"
 }
 
 dependencies {
@@ -48,7 +65,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation project(path: ':openCVLibrary24132')
+    implementation project(path: ':opencvsdk451')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

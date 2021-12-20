@@ -25,8 +25,8 @@ import android.widget.Toast;
 
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
-import org.opencv.highgui.Highgui;
-//import org.opencv.imgcodecs.Imgcodecs;
+//import org.opencv.highgui.Highgui;
+import org.opencv.imgcodecs.Imgcodecs;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class PanoramaStitchingActivity extends AppCompatActivity {
 
     static {
         System.loadLibrary("MyLibs");
-        System.loadLibrary("opencv_java");
+        System.loadLibrary("opencv_java4");
     }
 
     private TextView mTextViewJni;
@@ -240,7 +240,7 @@ public class PanoramaStitchingActivity extends AppCompatActivity {
                     sdcard.mkdirs();
                     final String fileName = sdcard + "/openCV_" + System.currentTimeMillis() + ".png";
                     try {
-                        boolean bool = Highgui.imwrite(fileName, result);
+                        boolean bool = Imgcodecs.imwrite(fileName, result);
                         if (bool)
                             Log.i("Panorama","SUCCESS writing image to external storage" +  fileName);
                         else

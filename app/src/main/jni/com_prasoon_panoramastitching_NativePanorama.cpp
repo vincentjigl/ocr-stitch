@@ -21,7 +21,7 @@ JNIEXPORT jint JNICALL Java_com_prasoon_panoramastitching_NativePanorama_process
         Mat newimage;
 
         // Convert to a 3 channel Mat to use with Stitcher module
-        cvtColor(curimage, newimage, CV_RGBA2RGB);
+        cvtColor(curimage, newimage, COLOR_RGBA2RGB);
 
         // Reduce the resolution for fast computation
         float scale = 1000.0f / curimage.rows;
@@ -33,19 +33,19 @@ JNIEXPORT jint JNICALL Java_com_prasoon_panoramastitching_NativePanorama_process
 
   Mat & result  = *(Mat*) outputAddress;
 
-  Stitcher stitcher = Stitcher::createDefault(true);
-  Stitcher::Status status = stitcher.stitch(imgVec, result);
-  stitcher.setRegistrationResol(-1); /// 0.6
-  stitcher.setSeamEstimationResol(-1);   /// 0.1
-  stitcher.setCompositingResol(-1);   //1
-  stitcher.setPanoConfidenceThresh(-1);   //1
-  stitcher.setWaveCorrection(true);
-  stitcher.setWaveCorrectKind(detail::WAVE_CORRECT_HORIZ);
+    Ptr<Stitcher> stitcher = Stitcher::create((Stitcher::Mode)0);
+  Stitcher::Status status = stitcher->stitch(imgVec, result);
+  stitcher->setRegistrationResol(-1); /// 0.6
+  stitcher->setSeamEstimationResol(-1);   /// 0.1
+  stitcher->setCompositingResol(-1);   //1
+  stitcher->setPanoConfidenceThresh(-1);   //1
+  stitcher->setWaveCorrection(true);
+  stitcher->setWaveCorrectKind(detail::WAVE_CORRECT_HORIZ);
 
    if (status != Stitcher::OK){
                   ret=0;
    }else{
-         cv::cvtColor(result, result, CV_BGR2RGBA, 4);
+         cv::cvtColor(result, result, COLOR_RGBA2RGB, 4);
          }
 
   // Release the jlong array
