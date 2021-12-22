@@ -31,7 +31,7 @@ public class StitchingActivity extends AppCompatActivity {
 
     static {
         System.loadLibrary("MyLibs");
-        System.loadLibrary("opencv_java3");
+        System.loadLibrary("opencv_java4");
     }
 
     private TextView mTextViewJni;
@@ -136,14 +136,14 @@ public class StitchingActivity extends AppCompatActivity {
             @Override
             public void onPictureTaken(byte[] data, Camera camera) {
                 // decode the byte array to a bitmap
-                for(int i=0;i<352;i++) {
+                for(int i=0;i< 352;i++) {
                     String str;
                     str = String.format("img00%03d", i);
                     File sdcard = Environment.getExternalStorageDirectory();
                     final String fileName = sdcard + "/saved_imgs6/" + str + ".jpg";
 
                     Mat tmp = Imgcodecs.imread(fileName);
-                    Log.i("jgl_stitch", "filename "+ fileName  + " width " + tmp.width() +" height " + tmp.height() + "addr %lld" + tmp.getNativeObjAddr());
+                    Log.i("jgl_stitch", "filename "+ fileName  + " width " + tmp.width() +" height " + tmp.height() + " addr " + tmp.getNativeObjAddr());
                     listImage.add(tmp.clone());
                 }
                 Log.i("jgl_stitch", "image load success");

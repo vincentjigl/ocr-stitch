@@ -89,7 +89,7 @@ public:
         // 		else
         if(imgFile)
         {
-            matImg = imread(imgFile, CV_LOAD_IMAGE_COLOR);
+            matImg = imread(imgFile, IMREAD_COLOR);
             if(!matImg.empty()) return;
         }
         printf("open image file failed! %s \n", imgFile);

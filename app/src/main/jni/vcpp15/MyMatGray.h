@@ -76,7 +76,7 @@ public:
  	MyMatGray(const char* imgFile){
 		if(imgFile)
 		{
-			matImg = imread(imgFile, CV_LOAD_IMAGE_GRAYSCALE);
+			matImg = imread(imgFile, IMREAD_GRAYSCALE);
 			if(!matImg.empty()) return;
 		}
 		printf("open image file failed! %s \n", imgFile);

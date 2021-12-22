@@ -14,7 +14,7 @@ public:
 
     MyMatColor(const char* imgFile)
     {
-        matImg = imread(imgFile, CV_LOAD_IMAGE_COLOR);
+        matImg = imread(imgFile, IMREAD_COLOR);
     }
 
     // 	const cv::Mat cv(){

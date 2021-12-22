@@ -33,7 +33,7 @@ extern "C" {
 	        {
 	    		sprintf(filename, "%s/img%05d.jpg", videoName, i);
 	            // printf("%s\n", filename);
-		        cv::Mat frame = imread(filename, CV_LOAD_IMAGE_COLOR);
+		        cv::Mat frame = imread(filename, IMREAD_COLOR);
 	            if(!frame.data)
 	            {
 	                // printf("[mbh] video end! line=34\n");
