@@ -10,7 +10,7 @@
         android:layout_width="199dp"
         android:layout_height="66dp"
         android:gravity="center"
-        android:text="Panorama Image Stitching"
+        android:text="Camera Image Stitching"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
