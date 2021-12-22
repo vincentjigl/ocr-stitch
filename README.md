@@ -6,6 +6,22 @@ All Panoramas will be saved in /storage/emulated/0/Pictures
 
 Download Panorama Stitching-v1.0.apk to run in your Android phone.
 
+## Settings:
+	Android.mk assign opencv root path
+		OPENCVROOT:= C:\env\opencv\opencv-4.5.3-android-sdk\OpenCV-android-sdk
+	Application.mk
+		APP_ABI := arm64-v8a #armeabi-v7a #
+		APP_STL := c++_static
+	Setting.gradle app/build.gradle  import opencv sdk
+		implementation project(':opencvsdk453')
+		rootProject.name = "stitching"
+		include ':opencvsdk453'
+	NDK setting in app/build.gradle
+		commandLine "C:\\env\\android-ndk-r17c\\ndk-build.cmd",
+	Android SDK+NDK setting in local.properties
+		sdk.dir=C\:\\env\\Sdk
+		ndk.dir=C:\\env\\android-ndk-r17c
+
 ## input:
 
 ![](images/3x4_Grid.jpg)
