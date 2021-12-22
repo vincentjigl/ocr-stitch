@@ -39,7 +39,7 @@ public class PanoramaStitchingActivity extends AppCompatActivity {
 
     static {
         System.loadLibrary("MyLibs");
-        System.loadLibrary("opencv_java4");
+        System.loadLibrary("opencv_java3");
     }
 
     private TextView mTextViewJni;
@@ -144,51 +144,67 @@ public class PanoramaStitchingActivity extends AppCompatActivity {
             @Override
             public void onPictureTaken(byte[] data, Camera camera) {
                 // decode the byte array to a bitmap
-                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                for(int i=0;i<352;i++) {
+                    String str;
+                    str = String.format("img00%03d", i);
+                    File sdcard = Environment.getExternalStorageDirectory();
+                    final String fileName = sdcard + "/saved_imgs6/" + str + ".jpg";
 
-                // Extra maybe added to avoid camera error
-                //camera.startPreview();
-                // Rotate the picture to fit portrait mode
-                Matrix matrix = new Matrix();
-                matrix.postRotate(90);
-                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-                        bitmap.getHeight(), matrix, false);
-
-                // TODO: Save the image to a list to pass them to OpenCV method
-                Mat mat = new Mat();
-                Bitmap bmp32 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-
-                Utils.bitmapToMat(bmp32, mat);
-                listImage.add(mat);
-
-                Canvas canvas = null;
-                try {
-                    canvas = mSurfaceViewOnTop.getHolder().lockCanvas(null);
-                    synchronized (mSurfaceViewOnTop.getHolder()) {
-                        // Clear canvas
-                        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-
-                        // Scale the image to fit the SurfaceView
-                        float scale = 1.0f * mSurfaceView.getHeight() / bitmap.getHeight();
-                        Bitmap scaleImage = Bitmap.createScaledBitmap(bitmap,
-                                (int) (scale * bitmap.getWidth()), mSurfaceView.getHeight(), false);
-
-                        Paint paint = new Paint();
-                        // Set the opacity of the image
-                        paint.setAlpha(200);
-
-                        // Draw the image with an offset so we only see one third of the image.
-                        canvas.drawBitmap(scaleImage, -scaleImage.getWidth() * 2 / 3, 0, paint);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    if (canvas != null) {
-                        mSurfaceViewOnTop.getHolder().unlockCanvasAndPost(canvas);
-                    }
+                    Mat tmp = Imgcodecs.imread(fileName);
+                    Log.i("jgl_stitch", "filename "+ fileName  + " width " + tmp.width() +" height " + tmp.height() + "addr %lld" + tmp.getNativeObjAddr());
+                    listImage.add(tmp.clone());
                 }
+                Log.i("jgl_stitch", "image load success");
+
+//                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+//
+//
+//                    // Extra maybe added to avoid camera error
+//                    //camera.startPreview();
+//                    // Rotate the picture to fit portrait mode
+//                    Matrix matrix = new Matrix();
+//                    matrix.postRotate(90);
+//                    bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+//                            bitmap.getHeight(), matrix, false);
+//
+//                    // TODO: Save the image to a list to pass them to OpenCV method
+//                    Mat mat = new Mat();
+//                    Bitmap bmp32 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+//
+//                    Utils.bitmapToMat(bmp32, mat);
+//                    listImage.add(mat);
+//
+//                    Canvas canvas = null;
+//                    try {
+//                        canvas = mSurfaceViewOnTop.getHolder().lockCanvas(null);
+//                        synchronized (mSurfaceViewOnTop.getHolder()) {
+//                            // Clear canvas
+//                            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+//
+//                            // Scale the image to fit the SurfaceView
+//                            float scale = 1.0f * mSurfaceView.getHeight() / bitmap.getHeight();
+//                            Bitmap scaleImage = Bitmap.createScaledBitmap(bitmap,
+//                                    (int) (scale * bitmap.getWidth()), mSurfaceView.getHeight(), false);
+//
+//                            Paint paint = new Paint();
+//                            // Set the opacity of the image
+//                            paint.setAlpha(200);
+//
+//                            // Draw the image with an offset so we only see one third of the image.
+//                            canvas.drawBitmap(scaleImage, -scaleImage.getWidth() * 1 / 3, 0, paint);
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    } finally {
+//                        if (canvas != null) {
+//                            mSurfaceViewOnTop.getHolder().unlockCanvasAndPost(canvas);
+//                        }
+//                    }
+
+
                 mCam.startPreview();
                 safeToTakePicture = true;
+
             }
         };
 
