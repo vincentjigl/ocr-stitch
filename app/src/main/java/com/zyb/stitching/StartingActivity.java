@@ -30,7 +30,7 @@ public class StartingActivity extends AppCompatActivity {
                         == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this.getApplicationContext(),permissions[2])
                         == PackageManager.PERMISSION_GRANTED){
-            Intent intent = new Intent(this, PanoramaStitchingActivity.class);
+            Intent intent = new Intent(this, StitchingActivity.class);
                     startActivity(intent);
         }else {
             ActivityCompat.requestPermissions(StartingActivity.this, permissions, REQUEST_CODE);

@@ -1,6 +1,6 @@
-# PanoramaStitching-Android-OpenCV
+# stitching-Android-OpenCV
 
-This project is created using OpenCV-2.4.13.2 with NDK-17, since Stitcher functions were defined as a part of OpenCV in this version.
+This project is created using OpenCV-3.4.16 with NDK-17, since Stitcher functions were defined as a part of OpenCV in this version.
 
 All Panoramas will be saved in /storage/emulated/0/Pictures
 
@@ -16,5 +16,6 @@ Download Panorama Stitching-v1.0.apk to run in your Android phone.
 
 ## Usage:
 
-Click on "Capture" and move the camera in such a way that some part of previous capture will be visible.
-"Save" the Panorama.
+Click on "Capture".
+Move the camera in such a way that some part of previous capture will be visible.
+Click "Save" the Panorama.
