@@ -10,7 +10,7 @@ OPENCV_INSTALL_MODULES:=on
 OPENCV_LIB_TYPE:=SHARED
 include ${OPENCVROOT}/sdk/native/jni/OpenCV.mk
 
-LOCAL_SRC_FILES := com_prasoon_panoramastitching_NativePanorama.cpp lib/v4l2cap_img.cpp
+LOCAL_SRC_FILES := com_zyb_stitching_NativePanorama.cpp lib/v4l2cap_img.cpp
 
 LOCAL_LDLIBS += -llog -lstdc++
 LOCAL_MODULE := MyLibs

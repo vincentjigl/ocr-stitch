@@ -1,3 +1,3 @@
 include ':app'
-rootProject.name = "Panorama Stitching"
+rootProject.name = "stitching"
 include ':opencvsdk3416'
